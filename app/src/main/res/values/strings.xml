@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Frends_management</string>
+    <string name="friend_add">添加好友</string>
+    <string name="friend_name">姓名</string>
+    <string name="friend_gender">性别</string>
+    <string name="friend_gender_male">男</string>
+    <string name="friend_gender_female">女</string>
+    <string name="friend_birthday">生日</string>
+    <string name="friend_hobby">爱好</string>
+    <string name="friend_hobby_of_1">电影</string>
+    <string name="friend_hobby_of_2">编程</string>
+    <string name="friend_hobby_of_3">篮球</string>
+    <string name="friend_hobby_of_4">足球</string>
+    <string name="friend_hobby_of_5">游泳</string>
+    <string name="friend_hobby_of_6">羽毛球</string>
+    <string name="friend_hobby_of_7">绘画</string>
+    <string name="friend_hobby_of_9">写作</string>
+    <string name="friend_hobby_of_10">美食</string>
+    <string name="friend_hobby_of_11">游戏</string>
+    <string name="friend_hobby_of_12">购物</string>
+    <string name="friend_hobby_of_13">阅读</string>
+    <string name="friend_hobby_of_14">登山</string>
+    <string name="friend_hobby_of_15">旅游</string>
+    <string name="cancel_button">取消</string>
+    <string name="ensure_button">确认</string>
+</resources>
