@@ -15,7 +15,7 @@
 
         <ImageButton
             android:id="@+id/last_page"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:src="@drawable/arrow_left" />
 
@@ -30,22 +30,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:paddingLeft="28dp">
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/friend_name"
+            android:textColor="@android:color/black"
             android:textSize="24sp" />
 
         <TextView
             android:id="@+id/friend_name"
             android:layout_width="197dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="14dp"
-            android:hint="@string/app_name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="@string/friend_name"
             android:textSize="24sp" />
 
     </LinearLayout>
@@ -53,36 +56,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:paddingLeft="28dp">
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/friend_gender"
+            android:textColor="@android:color/black"
             android:textSize="24sp" />
 
         <RadioGroup
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/male_rd"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="RadioButton" />
+                android:text="@string/friend_gender_male"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
 
             <RadioButton
                 android:id="@+id/female_rd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="RadioButton" />
+                android:text="@string/friend_gender_female"
+                android:textColor="@android:color/black"
+                android:textSize="24sp" />
         </RadioGroup>
 
     </LinearLayout>
@@ -90,82 +100,241 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:paddingLeft="28dp">
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/friend_birthday"
-            android:textSize="24dp" />
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/birthday"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:ems="10"
+            android:gravity="center"
             android:hint="1999-9-9"
             android:inputType="date"
-            android:textSize="24dp"
-            android:gravity="center"/>
+            android:textSize="24dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingLeft="28dp"
-        android:layout_marginTop="20dp">
+        android:paddingRight="28dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/friend_hobby"
-            android:textSize="24dp" />
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="162dp">
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp">
 
 
         <CheckBox
-            android:id="@+id/checkBox5"
-            android:layout_width="wrap_content"
+            android:id="@+id/checkBox_hobby_of_1"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CheckBox" />
+            android:text="@string/friend_hobby_of_1"
+            android:textSize="18sp" />
 
         <CheckBox
-            android:id="@+id/checkBox7"
-            android:layout_width="wrap_content"
+            android:id="@+id/checkBox_hobby_of_2"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CheckBox" />
+            android:text="@string/friend_hobby_of_2"
+            android:textSize="18sp" />
 
         <CheckBox
-            android:id="@+id/checkBox6"
-            android:layout_width="wrap_content"
+            android:id="@+id/checkBox_hobby_of_3"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CheckBox" />
+            android:text="@string/friend_hobby_of_3"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="28dp"
+        android:paddingRight="16dp">
+
 
         <CheckBox
-            android:id="@+id/checkBox4"
-            android:layout_width="wrap_content"
+            android:id="@+id/checkBox_hobby_of_4"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CheckBox" />
+            android:text="@string/friend_hobby_of_4"
+            android:textSize="18sp" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="wrap_content"
+            android:id="@+id/checkBox_hobby_of_5"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CheckBox" />
+            android:text="@string/friend_hobby_of_5"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_6"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_6"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp">
+
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_7"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_7"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_8"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_8"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_9"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_9"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp">
+
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_10"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_10"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_11"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_11"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_12"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_12"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="28dp"
+        android:paddingRight="0dp">
+
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_13"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_13"
+            android:textSize="18sp" />
+
+        <CheckBox
+            android:id="@+id/checkBox_hobby_of_14"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friend_hobby_of_14"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="343dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/cancel_button"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/ensure_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="@string/ensure_button"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 </LinearLayout>

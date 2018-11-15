@@ -14,13 +14,13 @@
     <string name="friend_hobby_of_5">游泳</string>
     <string name="friend_hobby_of_6">羽毛球</string>
     <string name="friend_hobby_of_7">绘画</string>
-    <string name="friend_hobby_of_9">写作</string>
-    <string name="friend_hobby_of_10">美食</string>
-    <string name="friend_hobby_of_11">游戏</string>
-    <string name="friend_hobby_of_12">购物</string>
-    <string name="friend_hobby_of_13">阅读</string>
-    <string name="friend_hobby_of_14">登山</string>
-    <string name="friend_hobby_of_15">旅游</string>
+    <string name="friend_hobby_of_8">写作</string>
+    <string name="friend_hobby_of_9">美食</string>
+    <string name="friend_hobby_of_10">游戏</string>
+    <string name="friend_hobby_of_11">购物</string>
+    <string name="friend_hobby_of_12">阅读</string>
+    <string name="friend_hobby_of_13">登山</string>
+    <string name="friend_hobby_of_14">旅游</string>
     <string name="cancel_button">取消</string>
     <string name="ensure_button">确认</string>
 </resources>
