@@ -3,14 +3,14 @@ package com.example.mirliam.frends_management;
 import java.util.Date;
 import java.util.UUID;
 
-public class Frend {
+public class Friend {
     private UUID mId;
     private String mName;
     private String mGender;
     private Date mBirthday;
     private String mHobby[];
 
-    public Frend() {
+    public Friend() {
         mId = UUID.randomUUID();
         mBirthday = new Date(1999, 9, 9);
     }
