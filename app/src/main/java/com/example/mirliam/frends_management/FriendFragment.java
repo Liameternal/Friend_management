@@ -1,16 +1,20 @@
 package com.example.mirliam.frends_management;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -18,6 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class FriendFragment extends Fragment {
@@ -44,9 +49,11 @@ public class FriendFragment extends Fragment {
         mLastImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast t = Toast.makeText(getActivity(), "It is doesn't work now!", Toast.LENGTH_SHORT);
-                t.setGravity(Gravity.BOTTOM, 0, 0);
-                t.show();
+//                Toast t = Toast.makeText(getActivity(), "It is doesn't work now!", Toast.LENGTH_SHORT);
+//                t.setGravity(Gravity.BOTTOM, 0, 0);
+//                t.show();
+                String str = mBirthday.getText().toString();
+                mFriendName.setText(str);
             }
         });
 
@@ -75,7 +82,7 @@ public class FriendFragment extends Fragment {
                 if (checkedId == R.id.male_rd) {
                     Toast.makeText(getActivity(), "male!", Toast.LENGTH_SHORT).show();
                     mFriend.setGender("男");
-                } else if(checkedId == R.id.female_rd) {
+                } else if (checkedId == R.id.female_rd) {
                     Toast.makeText(getActivity(), "female!", Toast.LENGTH_SHORT).show();
                     mFriend.setGender("女");
                 }
@@ -85,12 +92,20 @@ public class FriendFragment extends Fragment {
         mBirthday = v.findViewById(R.id.birthday);
         mChoseBirthday = v.findViewById(R.id.chose_birthday);
         mChoseBirthday.setOnClickListener(new View.OnClickListener() {
+            final Calendar c = Calendar.getInstance();
+
             @Override
             public void onClick(View v) {
-
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        c.set(year, monthOfYear, dayOfMonth);
+                        mBirthday.setText(DateFormat.format("yyy-MM-dd", c));
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
             }
         });
-
 
         return v;
     }
