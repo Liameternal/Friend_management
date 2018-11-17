@@ -9,17 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FriendActivity">
+        <activity android:name=".FriendListActivity"
+            android:label="@string/friend_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".FriendBackword"-->
-            <!--android:label="添加好友"-->
-            <!--android:parentActivityName=".FriendActivity">-->
-        <!--</activity>-->
+        <activity android:name=".FriendActivity"/>
+        <activity android:name=".FriendBackword"
+            android:label="@string/friend_add"
+            android:parentActivityName=".FriendListActivity">
+        </activity>
     </application>
 
 </manifest>

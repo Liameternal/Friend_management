@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Frends_management</string>
+    <string name="app_name">Friends_management</string>
+    <string name="friend_list">好友列表</string>
     <string name="friend_add">添加好友</string>
     <string name="friend_name">姓名</string>
     <string name="friend_gender">性别</string>
@@ -23,4 +24,8 @@
     <string name="friend_hobby_of_14">旅游</string>
     <string name="cancel_button">取消</string>
     <string name="ensure_button">确认</string>
+    <string name="friend_add_done">添加完成！</string>
+    <string name="friend_add_cancel">取消添加！</string>
+    <string name="error_tip_1">爱好不能超过三个！！！</string>
+    <string name="error_tip_2">爱好至少一个！！！</string>
 </resources>
