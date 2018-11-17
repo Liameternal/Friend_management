@@ -8,7 +8,7 @@ public class Friend {
     private String mName;
     private String mGender;
     private Date mBirthday;
-    private String mHobby[];
+    private int mHobby[];
 
     public Friend() {
         mId = UUID.randomUUID();
@@ -43,11 +43,11 @@ public class Friend {
         mBirthday = birthday;
     }
 
-    public String[] getHobby() {
+    public int[] getHobby() {
         return mHobby;
     }
 
-    public void setHobby(String[] hobby) {
-        mHobby = hobby;
+    public void setHobby(int hobby, int i) {
+        mHobby[i] = hobby;
     }
 }
