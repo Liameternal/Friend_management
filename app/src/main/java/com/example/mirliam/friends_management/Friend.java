@@ -1,9 +1,6 @@
 package com.example.mirliam.friends_management;
 
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 public class Friend {
@@ -11,7 +8,7 @@ public class Friend {
     private String mName;
     private String mGender;
     private Date mBirthday;
-    private List<String> mHobby = new ArrayList<>();
+    private StringBuilder mHobby;
 
 
     public Friend() {
@@ -55,7 +52,11 @@ public class Friend {
         mBirthday = birthday;
     }
 
-    public List<String> getHobby() {
+    public StringBuilder getHobby() {
         return mHobby;
+    }
+
+    public void setHobby(StringBuilder hobby) {
+        mHobby = hobby;
     }
 }

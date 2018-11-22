@@ -1,4 +1,8 @@
 <resources>
+    <string name="title_add">添加好友</string>
+    <string name="title_modefy">修改好友信息</string>
+    <string name="name_info">好友信息</string>
+
     <string name="app_name">Friends_management</string>
     <string name="friend_list">好友列表</string>
     <string name="friend_add">添加好友</string>
