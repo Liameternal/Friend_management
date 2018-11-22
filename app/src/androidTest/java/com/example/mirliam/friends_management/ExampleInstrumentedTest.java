@@ -1,4 +1,4 @@
-package com.example.mirliam.frends_management;
+package com.example.mirliam.friends_management;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

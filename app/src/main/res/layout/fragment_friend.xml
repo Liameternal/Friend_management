@@ -98,7 +98,7 @@
             android:textColor="@android:color/black"
             android:textSize="24sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/birthday"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -108,12 +108,6 @@
             android:hint="1999-9-9"
             android:inputType="date"
             android:textSize="24dp" />
-
-        <Button
-            android:id="@+id/chose_birthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="日期选择" />
 
     </LinearLayout>
 

@@ -1,4 +1,5 @@
-package com.example.mirliam.frends_management;
+package com.example.mirliam.friends_management;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,9 +13,10 @@ public class Friend {
     private Date mBirthday;
     private List<String> mHobby = new ArrayList<>();
 
+
     public Friend() {
         mId = UUID.randomUUID();
-        mBirthday = new Date(1999, 9, 9);
+        mBirthday = new Date();
     }
 
     public UUID getId() {
@@ -29,8 +31,16 @@ public class Friend {
         mName = name;
     }
 
-    public String getGender() {
-        return mGender;
+    public boolean getGender() {
+        if(mGender == null){
+            ;
+        }else {
+            if (mGender.equals("男")) {
+                return true;
+            } else if (mGender.equals("女"))
+                return false;
+        }
+        return true;
     }
 
     public void setGender(String gender) {
