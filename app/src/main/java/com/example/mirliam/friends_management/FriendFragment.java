@@ -1,14 +1,18 @@
-package com.example.mirliam.frends_management;
+package com.example.mirliam.friends_management;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,37 +20,57 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
+import java.util.UUID;
 
 public class FriendFragment extends Fragment implements CompoundButton.OnCheckedChangeListener {
+
+    private static final String ARG_CRIME_ID = "friend_id";
+    private String mHobby[] = {"电影","编程","篮球","足球","游泳","羽毛球","绘画","写作","美食","游戏","购物","阅读","登山","旅行"};
+
     private Friend mFriend;
     private EditText mFriendName;
     private RadioGroup mGenderRadioButton;
-    private TextView mBirthday;
-    private Button mChoseBirthday;
+    private RadioButton mGenderbuttonMale;
+    private RadioButton mGenderbuttonFemale;
+    private EditText mBirthday;
     private CheckBox mHobbyCheckBox[] = new CheckBox[14];
     private int mNumbersOfHobby = 0;  //不超过三个
     private Button mCancelButton;
     private Button mEnsureButton;
 
+    public static FriendFragment newInstance(UUID frienid) {
+        Bundle args = new Bundle(0);
+        args.putSerializable(ARG_CRIME_ID, frienid);
+
+        FriendFragment fragment = new FriendFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFriend = new Friend();
+
+        UUID friendId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
+        mFriend = FriendLab.get(getActivity()).getFriend(friendId);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_friend, container, false);
 
         mFriendName = v.findViewById(R.id.friend_name);
+        mFriendName.setText(mFriend.getName());
         mFriendName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -69,32 +93,32 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.male_rd) {
-                    Toast.makeText(getActivity(), "male!", Toast.LENGTH_SHORT).show();
                     mFriend.setGender("男");
                 } else if (checkedId == R.id.female_rd) {
-                    Toast.makeText(getActivity(), "female!", Toast.LENGTH_SHORT).show();
                     mFriend.setGender("女");
                 }
             }
         });
 
-        mBirthday = v.findViewById(R.id.birthday);
-        mChoseBirthday = v.findViewById(R.id.chose_birthday);
-        mChoseBirthday.setOnClickListener(new View.OnClickListener() {
-            final Calendar c = Calendar.getInstance();
+        mGenderbuttonMale = v.findViewById(R.id.male_rd);
+        mGenderbuttonMale.setChecked(mFriend.getGender());
 
+        mGenderbuttonFemale = v.findViewById(R.id.female_rd);
+        mGenderbuttonFemale.setChecked(!mFriend.getGender());
+
+        mBirthday = v.findViewById(R.id.birthday);
+        mBirthday.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        c.set(year, monthOfYear, dayOfMonth);
-                        mBirthday.setText(DateFormat.format("yyy-MM-dd", c));
-                    }
-                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-                dialog.show();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    getDate();
+                    return true;
+                }
+                return false;
             }
         });
+        mBirthday.setText((String) DateFormat.format("yyyy-MM-dd",mFriend.getBirthday()));
+//        mBirthday.setText(mFriend.getBirthday().toString());
 
         mHobbyCheckBox[0] = v.findViewById(R.id.checkBox_hobby_of_1);
         mHobbyCheckBox[0].setOnCheckedChangeListener(this);
@@ -138,6 +162,52 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
         mHobbyCheckBox[13] = v.findViewById(R.id.checkBox_hobby_of_14);
         mHobbyCheckBox[13].setOnCheckedChangeListener(this);
 
+        for (int i = 0; i < mFriend.getHobby().size(); i++) {
+            switch (mFriend.getHobby().get(i)){
+                case "电影":
+                    mHobbyCheckBox[0].setChecked(true);
+                    break;
+                case "编程":
+                    mHobbyCheckBox[1].setChecked(true);
+                    break;
+                case "篮球":
+                    mHobbyCheckBox[2].setChecked(true);
+                    break;
+                case "足球":
+                    mHobbyCheckBox[3].setChecked(true);
+                    break;
+                case "游泳":
+                    mHobbyCheckBox[4].setChecked(true);
+                    break;
+                case "羽毛球":
+                    mHobbyCheckBox[5].setChecked(true);
+                    break;
+                case "绘画":
+                    mHobbyCheckBox[6].setChecked(true);
+                    break;
+                case "写作":
+                    mHobbyCheckBox[7].setChecked(true);
+                    break;
+                case "美食":
+                    mHobbyCheckBox[8].setChecked(true);
+                    break;
+                case "游戏":
+                    mHobbyCheckBox[9].setChecked(true);
+                    break;
+                case "购物":
+                    mHobbyCheckBox[10].setChecked(true);
+                    break;
+                case "阅读":
+                    mHobbyCheckBox[11].setChecked(true);
+                    break;
+                case "登山":
+                    mHobbyCheckBox[12].setChecked(true);
+                    break;
+                case "旅行":
+                    mHobbyCheckBox[13].setChecked(true);
+                    break;
+            }
+        }
 
         mCancelButton = v.findViewById(R.id.cancel_bt);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -157,10 +227,11 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
 //                }
                 if (mNumbersOfHobby > 3) {
                     Toast.makeText(getActivity(), R.string.error_tip_1, Toast.LENGTH_SHORT).show();
-                } else if(mNumbersOfHobby < 1){
+                } else if (mNumbersOfHobby < 1) {
                     Toast.makeText(getActivity(), R.string.error_tip_2, Toast.LENGTH_SHORT).show();
-                }else
+                } else {
                     Toast.makeText(getActivity(), R.string.friend_add_done, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -168,12 +239,28 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
         return v;
     }
 
+    public void getDate(){
+        final Calendar c = Calendar.getInstance();
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                c.set(year, monthOfYear, dayOfMonth);
+                mBirthday.setText(DateFormat.format("yyy-MM-dd", c));
+                mFriend.setBirthday(c.getTime());
+            }
+        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+        dialog.show();
+    }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         switch (buttonView.getId()) {
             case R.id.checkBox_hobby_of_1:
                 if (isChecked) {
-                    mFriend.getHobby().add("电影");
+                    if(mFriend.getHobby().contains("电影"))
+                        ;
+                    else
+                        mFriend.getHobby().add("电影");
                     mNumbersOfHobby++;
                 } else {
                     mNumbersOfHobby--;
@@ -182,6 +269,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_2:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("编程"))
+                        ;
+                    else
                     mFriend.getHobby().add("编程");
                     mNumbersOfHobby++;
                 } else {
@@ -191,6 +281,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_3:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("篮球"))
+                        ;
+                    else
                     mFriend.getHobby().add("篮球");
                     mNumbersOfHobby++;
                 } else {
@@ -200,6 +293,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_4:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("足球"))
+                        ;
+                    else
                     mFriend.getHobby().add("足球");
                     mNumbersOfHobby++;
                 } else {
@@ -209,6 +305,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_5:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("游泳"))
+                        ;
+                    else
                     mFriend.getHobby().add("游泳");
                     mNumbersOfHobby++;
                 } else {
@@ -218,6 +317,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_6:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("羽毛球"))
+                        ;
+                    else
                     mFriend.getHobby().add("羽毛球");
                     mNumbersOfHobby++;
                 } else {
@@ -227,6 +329,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_7:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("绘画"))
+                        ;
+                    else
                     mFriend.getHobby().add("绘画");
                     mNumbersOfHobby++;
                 } else {
@@ -236,6 +341,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_8:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("写作"))
+                        ;
+                    else
                     mFriend.getHobby().add("写作");
                     mNumbersOfHobby++;
                 } else {
@@ -245,6 +353,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_9:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("美食"))
+                        ;
+                    else
                     mFriend.getHobby().add("美食");
                     mNumbersOfHobby++;
                 } else {
@@ -254,6 +365,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_10:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("游戏"))
+                        ;
+                    else
                     mFriend.getHobby().add("游戏");
                     mNumbersOfHobby++;
                 } else {
@@ -263,6 +377,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_11:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("购物"))
+                        ;
+                    else
                     mFriend.getHobby().add("购物");
                     mNumbersOfHobby++;
                 } else {
@@ -272,6 +389,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_12:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("阅读"))
+                        ;
+                    else
                     mFriend.getHobby().add("阅读");
                     mNumbersOfHobby++;
                 } else {
@@ -281,6 +401,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_13:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("登山"))
+                        ;
+                    else
                     mFriend.getHobby().add("登山");
                     mNumbersOfHobby++;
                 } else {
@@ -290,6 +413,9 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
             case R.id.checkBox_hobby_of_14:
                 if (isChecked) {
+                    if(mFriend.getHobby().contains("旅行"))
+                        ;
+                    else
                     mFriend.getHobby().add("旅行");
                     mNumbersOfHobby++;
                 } else {
@@ -299,5 +425,5 @@ public class FriendFragment extends Fragment implements CompoundButton.OnChecked
                 break;
         }
     }
-
 }
+

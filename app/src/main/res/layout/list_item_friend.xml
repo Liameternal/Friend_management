@@ -11,17 +11,19 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="80dp"
+            android:id="@+id/show_friend_name"
+            android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
-            android:text="老大王"
+            android:text="老大大王"
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/show_friend_gender"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -30,6 +32,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/show_friend_age"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -38,6 +41,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/show_friend_constellattion"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -52,24 +56,27 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="50dp"
+            android:id="@+id/show_friend_hobby_1"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
-            android:text="电影"
+            android:text="羽毛球"
             android:textSize="20sp" />
 
         <TextView
-            android:layout_width="50dp"
+            android:id="@+id/show_friend_hobby_2"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="游戏"
+            android:text="羽毛球"
             android:textSize="20sp" />
 
         <TextView
-            android:layout_width="50dp"
+            android:id="@+id/show_friend_hobby_3"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="阅读"
+            android:text="羽毛球"
             android:textSize="20sp" />
 
 

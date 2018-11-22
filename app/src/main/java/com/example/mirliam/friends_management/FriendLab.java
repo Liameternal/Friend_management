@@ -1,4 +1,4 @@
-package com.example.mirliam.frends_management;
+package com.example.mirliam.friends_management;
 
 import android.content.Context;
 
@@ -19,12 +19,19 @@ public class FriendLab {
 
     private FriendLab(Context context) {
         mFriends = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            Friend friend = new Friend();
-            friend.setName("老王 #" + i);
-            friend.setGender("男");
-            mFriends.add(friend);
-        }
+//        for (int i = 0; i < 100; i++) {
+//            Friend friend = new Friend();
+//            friend.setName("老王 #" + i);
+//            friend.setGender("男");
+//            friend.getHobby().add("电影");
+//            friend.getHobby().add("编程");
+//            friend.getHobby().add("篮球");
+//            mFriends.add(friend);
+//        }
+    }
+
+    public void addFriend(Friend friend){
+        mFriends.add(friend);
     }
 
     public List<Friend> getFriends() {
