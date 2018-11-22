@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -69,6 +69,8 @@ public class FriendListFragment extends Fragment {
             mFriendHobby[0] = itemView.findViewById(R.id.show_friend_hobby_1);
             mFriendHobby[1] = itemView.findViewById(R.id.show_friend_hobby_2);
             mFriendHobby[2] = itemView.findViewById(R.id.show_friend_hobby_3);
+
+            registerForContextMenu(itemView);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -93,26 +95,24 @@ public class FriendListFragment extends Fragment {
             mFriendAge.setText(String.valueOf(mAge));
             mFriendConstellation.setText(Constellation);
 
-            if (mFriend.getHobby().size() == 0) {
-                mFriendHobby[0].setText("");
-                mFriendHobby[1].setText("");
-                mFriendHobby[2].setText("");
-            } else {
-                mFriendHobby[0].setText(mFriend.getHobby().get(0));
-                mFriendHobby[1].setText(mFriend.getHobby().get(1));
-                mFriendHobby[2].setText(mFriend.getHobby().get(2));
-            }
+
+            mFriendHobby[0].setText(mFriend.getHobby().toString().split(" ")[0]);
+            mFriendHobby[1].setText(mFriend.getHobby().toString().split(" ")[1]);
+            mFriendHobby[2].setText(mFriend.getHobby().toString().split(" ")[2]);
+
         }
 
         @Override
         public void onClick(View v) {
-            Intent intent = FriendActivity.newIntent(getActivity(), mFriend.getId());
+            Intent intent = FriendActivity.newIntent(getActivity(), mFriend.getId(),0);
             startActivity(intent);
         }
     }
 
+
     private class FriendAdapter extends RecyclerView.Adapter<FriendHolder> {
         private List<Friend> mFriends;
+        private int mPosition;
 
         public FriendAdapter(List<Friend> friends) {
             mFriends = friends;
@@ -128,15 +128,46 @@ public class FriendListFragment extends Fragment {
 
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
-        public void onBindViewHolder(@NonNull FriendHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final FriendHolder holder, int position) {
             Friend friend = mFriends.get(position);
             holder.bind(friend);
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mPosition = holder.getAdapterPosition();
+                    return false;
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
             return mFriends.size();
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(0,1,0,"修改");
+        menu.add(0,2,0,"删除");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case 1:
+                Intent intent = FriendActivity.newIntent(getActivity(), FriendLab.get(getActivity()).getFriends().get(mAdapter.mPosition).getId(),1);
+                startActivity(intent);
+                break;
+            case 2:
+                FriendLab.get(getActivity()).getFriends().remove(mAdapter.mPosition);
+                mAdapter.notifyItemRemoved(mAdapter.mPosition);
+                break;
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     @Override
@@ -169,10 +200,10 @@ public class FriendListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_friend:
-                Friend friend = new Friend();
-                FriendLab.get(getActivity()).addFriend(friend);
-                Intent intent = FriendActivity.newIntent(getActivity(),friend.getId());
-//                Intent intent = new Intent(getActivity(), FriendActivity.class);
+//                Friend friend = new Friend();
+//                FriendLab.get(getActivity()).addFriend(friend);
+//                Intent intent = FriendActivity.newIntent(getActivity(),friend.getId());
+                Intent intent = new Intent(getActivity(), FriendActivity.class);
                 startActivity(intent);
                 return true;
             default:
