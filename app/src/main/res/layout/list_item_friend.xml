@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:background="@drawable/selector_item_selected"
+
+    tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +18,7 @@
 
         <TextView
             android:id="@+id/show_friend_name"
-            android:layout_width="100dp"
+            android:layout_width="110dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
@@ -60,7 +66,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="0dp"
             android:text="羽毛球"
             android:textSize="20sp" />
 
@@ -68,7 +74,7 @@
             android:id="@+id/show_friend_hobby_2"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="0dp"
             android:text="羽毛球"
             android:textSize="20sp" />
 
