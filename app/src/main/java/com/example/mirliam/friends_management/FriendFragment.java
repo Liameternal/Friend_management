@@ -24,9 +24,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -87,11 +89,11 @@ public class FriendFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_friend, container, false);
 
-        if(isAdd == 0){
+        if (isAdd == 0) {
             getActivity().setTitle(R.string.name_info);
-        }else if(isAdd == 1){
+        } else if (isAdd == 1) {
             getActivity().setTitle(R.string.title_modefy);
-        }else{
+        } else {
             getActivity().setTitle(R.string.title_add);
             mFriend = new Friend();
         }
@@ -181,7 +183,17 @@ public class FriendFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Objects.requireNonNull(getActivity()).finish();
+                int mHobbyLimit = 0;
+                for (CheckBox c : mHobbys) {
+                    if (c.isChecked()) {
+                        mHobbyLimit++;
+                    }
+                }
+                if (mHobbyLimit != 3) {
+                    Toast.makeText(getActivity(), "爱好必须选三个", Toast.LENGTH_SHORT).show();
+                } else {
+                    Objects.requireNonNull(getActivity()).finish();
+                }
             }
         });
 
@@ -189,9 +201,22 @@ public class FriendFragment extends Fragment {
         ensureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FriendLab.get(getActivity()).addFriend(mFriend);
+                int mHobbyLimit = 0;
 
-                Objects.requireNonNull(getActivity()).finish();
+                for (CheckBox c : mHobbys) {
+                    if (c.isChecked()) {
+                        mHobbyLimit++;
+                    }
+                }
+
+                if (isAdd != 0 && isAdd != 1) {
+                    if (mHobbyLimit != 3) {
+                        Toast.makeText(getActivity(), "爱好必须选三个", Toast.LENGTH_SHORT).show();
+                    } else {
+                        FriendLab.get(getActivity()).addFriend(mFriend);
+                        Objects.requireNonNull(getActivity()).finish();
+                    }
+                }
             }
         });
 
