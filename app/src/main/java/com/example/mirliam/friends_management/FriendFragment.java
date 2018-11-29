@@ -93,9 +93,9 @@ public class FriendFragment extends Fragment {
             getActivity().setTitle(R.string.title_modefy);
         }else{
             getActivity().setTitle(R.string.title_add);
+            mFriend = new Friend();
         }
 
-        mFriend = new Friend();
 
         mFriendName = v.findViewById(R.id.friend_name);
         mFriendName.addTextChangedListener(new TextWatcher() {
